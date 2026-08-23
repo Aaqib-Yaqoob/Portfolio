@@ -270,66 +270,136 @@ nav.primary-nav a.active{color:var(--brass-soft);border-bottom-color:var(--brass
 .case-result-row span{font-family:var(--serif);font-size:15px;color:var(--brass-soft);white-space:nowrap;}
 .case-close{margin-top:clamp(24px,3.5vw,32px);padding-top:clamp(18px,2.5vw,24px);border-top:1px solid var(--line);font-family:var(--serif);font-size:clamp(17px,1.9vw,20px);font-style:italic;color:var(--ivory);}
 
-/* ============ JOURNEY / TIMELINE ============ */
-.timeline{position:relative;margin-top:8px;}
-.timeline::before{
-  content:"";position:absolute;left:9px;top:6px;bottom:6px;width:1px;background:var(--line-strong);
-}
-.tl-item{position:relative;padding-left:38px;padding-bottom:clamp(28px,4vw,40px);}
-.tl-item:last-child{padding-bottom:0;}
-.tl-dot{
-  position:absolute;left:0;top:4px;width:19px;height:19px;border-radius:50%;
-  background:var(--bg-0);border:1px solid var(--brass);
-}
-.tl-item.is-current .tl-dot{background:var(--brass);}
-.tl-era{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px;}
-.tl-dates{font-size:12.5px;color:var(--muted-2);margin-bottom:4px;}
+/* ============ JOURNEY — text shared by the mobile fallback and the desktop scene ============ */
+.tl-era{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px;display:block;}
 .tl-title{font-family:var(--serif);font-size:clamp(19px,2.2vw,23px);color:var(--ivory);}
-.tl-org{font-size:14px;color:var(--brass-soft);margin-top:2px;}
-.tl-desc{margin-top:10px;font-size:14.5px;color:var(--muted);line-height:1.7;max-width:64ch;}
-.tl-progress{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.tl-desc{margin-top:8px;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--brass-soft);line-height:1.5;}
+.tl-progress{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
 .tl-progress span{
   font-size:11.5px;color:var(--ivory-dim);border:1px solid var(--line-strong);padding:4px 10px;letter-spacing:0.01em;
 }
 .tl-progress span:not(:last-child)::after{content:"→";margin-left:8px;color:var(--brass);}
 
-/* Static fallback is the default, accessible-first state: full narrative, no motion required. */
+/* ============ JOURNEY — mobile / reduced-motion fallback (default, accessible-first) ============ */
 .journey-fallback{margin-top:8px;}
-.scrolly{display:none;}
+.mobile-journey{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.mj-stage{width:100%;max-width:60ch;padding:6px 0;}
+.mj-arrow{color:var(--brass);font-size:18px;padding:6px 0;}
+.mj-accounts{margin-top:10px;display:flex;flex-direction:column;gap:6px;align-items:center;}
+.mj-account-row{font-size:12px;color:var(--ivory-dim);}
+.mj-account-row b{color:var(--brass-soft);font-weight:600;letter-spacing:0.01em;}
+.mj-resolution{margin-top:14px;padding-top:24px;border-top:1px solid var(--line);width:100%;max-width:60ch;}
+.mj-resolve-line{font-family:var(--serif);font-style:italic;font-size:clamp(20px,4vw,24px);color:var(--brass-soft);}
+.mj-resolve-sub{margin-top:8px;font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted-2);}
 
-/* Scroll-driven variant — enabled only on wide viewports with no reduced-motion
-   preference (see the compound media query below). It layers a sticky route
-   diagram over the same facts; it never becomes the only place the story lives. */
-.scrolly-inner{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(32px,5vw,64px);align-items:start;}
-.scrolly-visual{position:sticky;top:92px;padding-top:8px;}
-.scrolly-visual-frame{position:relative;height:min(58vh,520px);padding-right:112px;}
-.scrolly-svg{width:calc(100% - 112px);height:100%;overflow:visible;}
-.scrolly-path{fill:none;stroke:var(--line-strong);stroke-width:1.5;}
-.scrolly-node circle{fill:var(--bg-0);stroke:var(--line-strong);stroke-width:1.5;transition:fill .4s ease,stroke .4s ease;}
-.scrolly-node.is-reached circle{fill:var(--brass);stroke:var(--brass);}
-.scrolly-marker{fill:var(--brass-soft);filter:drop-shadow(0 0 6px rgba(200,162,76,0.45));}
-.scrolly-node-label{position:absolute;right:0;width:104px;transform:translateY(-50%);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted-2);transition:color .4s ease;}
-.scrolly-node-label.is-reached{color:var(--brass-soft);}
-.scrolly-env{opacity:0;transition:opacity .7s ease;}
-.scrolly-env circle,.scrolly-env rect{fill:rgba(243,238,226,0.02);stroke:var(--line-strong);stroke-width:1.1;}
-.scrolly-env path{fill:none;stroke:var(--line-strong);stroke-width:1;}
-.scrolly-env[data-env="3"] .env-bars{stroke-width:2;stroke-linecap:round;}
-.scrolly-env.is-upcoming{opacity:0;}
-.scrolly-env.is-passed{opacity:0.22;}
-.scrolly-env.is-current{opacity:1;}
-.scrolly-env.is-current circle,.scrolly-env.is-current rect{stroke:var(--brass);fill:rgba(200,162,76,0.10);}
-.scrolly-env.is-current path{stroke:var(--brass-soft);}
-.scrolly-tagline{margin-top:22px;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--brass-soft);opacity:0;transition:opacity .6s ease;}
-.scrolly-visual.is-resolved .scrolly-tagline{opacity:1;}
-.scrolly-stage{min-height:92vh;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:32px 0;max-width:60ch;transition:opacity .5s ease;}
-.scrolly-stage:first-child{min-height:52vh;}
-.scrolly-stage .tl-desc{max-width:58ch;}
-.scrolly.scrolly-js .scrolly-stage{opacity:0.38;}
-.scrolly.scrolly-js .scrolly-stage.is-active{opacity:1;}
+/* ============ JOURNEY — cinematic scroll scene (desktop, motion-enabled only) ============
+   A single normalized scroll-progress value (0..1) drives everything below: the camera
+   pan, the figure that travels through the environment, every element's opacity, the
+   account-identity chips, the text panel and the final resolution. See the script block. */
+.scrolly{display:none;}
 
 @media (min-width:981px) and (prefers-reduced-motion: no-preference){
   .scrolly{display:block;}
   .journey-fallback{display:none;}
+
+  .scrolly{height:560vh;position:relative;}
+  .scrolly-pin{position:sticky;top:84px;height:min(84vh,720px);}
+  .scrolly-pin-inner{position:relative;height:100%;}
+  .scene-frame{
+    position:absolute;inset:0;overflow:hidden;border:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 25% 15%, rgba(92,20,36,0.24), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(200,162,76,0.07), transparent 50%),
+      var(--bg-1);
+  }
+  .scene-svg{position:absolute;inset:0;width:100%;height:100%;}
+  .scene-road{fill:none;stroke:var(--line-strong);stroke-width:1.5;}
+  .scene-road-traveled{fill:none;stroke:var(--brass);stroke-width:2;opacity:0.5;}
+
+  /* Opening — The Operating Years: a brief montage of early operating & people-management
+     work. Deliberately not an org chart or HR scene — a counter, a checklist, a laptop,
+     a few informal colleagues passing quickly before the main career story begins. */
+  .opening-el{opacity:0;}
+  .opening-el .team-dot{fill:var(--brass);}
+  .opening-el .counter-body{fill:rgba(243,238,226,0.05);stroke:var(--line-strong);stroke-width:1;}
+  .opening-el .counter-customer{fill:var(--muted-2);}
+  .opening-el .checklist-body{fill:rgba(243,238,226,0.04);stroke:var(--line-strong);stroke-width:1;}
+  .opening-el .checklist-tick{fill:none;stroke:var(--brass-soft);stroke-width:1.2;stroke-linecap:round;}
+  .opening-el .early-laptop-body{fill:rgba(243,238,226,0.05);stroke:var(--line-strong);stroke-width:1;}
+  .opening-el .early-laptop-screen{fill:rgba(92,20,36,0.2);stroke:var(--line-strong);stroke-width:0.9;}
+
+  /* Scene 2 — Restaurant Operations: storefronts that grow with scope */
+  .rest-building{opacity:0;}
+  .rest-building rect{fill:rgba(243,238,226,0.03);stroke:var(--line-strong);stroke-width:1.1;}
+  .rest-building .storefront-label{font-family:var(--sans);font-size:8px;letter-spacing:0.07em;text-transform:uppercase;fill:var(--brass-soft);}
+  .rest-node{opacity:0;}
+  .rest-node circle{fill:var(--brass);}
+
+  /* Scene 3 — Meituan / Keeta: the same locations become digital, a marketplace / data environment forms */
+  .scene-network{opacity:0;}
+  .scene-network .net-link{fill:none;stroke:var(--brass-soft);stroke-width:1;}
+  .scene-network .net-node{fill:var(--brass);}
+  .scene-network .laptop-body{fill:rgba(243,238,226,0.05);stroke:var(--line-strong);stroke-width:1.1;}
+  .scene-network .laptop-screen{fill:rgba(92,20,36,0.28);stroke:var(--brass);stroke-width:0.75;}
+  .scene-network .keeta-mark{font-family:var(--serif);font-style:italic;font-size:15px;fill:var(--brass-soft);}
+
+  /* Scene 4 — ALFA: an executive environment. The figure stands beside a screen;
+     stakeholders are seated around the table, not at its head. */
+  .scene-cluster.is-alfa .board-table{fill:rgba(243,238,226,0.03);stroke:var(--line-strong);stroke-width:1;}
+  .scene-cluster.is-alfa .board-seat{fill:var(--muted-2);opacity:0.75;}
+  .scene-cluster.is-alfa .board-screen{fill:rgba(92,20,36,0.3);stroke:var(--brass);stroke-width:0.9;}
+  .scene-cluster.is-alfa .board-mark{font-family:var(--serif);font-style:italic;font-size:16px;fill:var(--brass-soft);}
+  .scene-cluster.is-alfa .brand-stack-label{font-family:var(--sans);font-size:7px;letter-spacing:0.1em;text-transform:uppercase;fill:var(--muted-2);}
+  .scene-cluster.is-alfa .brand-stack-item{font-family:var(--sans);font-size:8.5px;fill:var(--ivory-dim);}
+  .pnl-bars{fill:none;stroke:var(--brass);stroke-width:2.2;stroke-linecap:round;}
+
+  /* the travelling figure: fixed on screen — a restrained editorial silhouette, not a
+     literal portrait. The environment around it grows; the figure itself does not. */
+  .scene-marker{filter:drop-shadow(0 0 6px rgba(200,162,76,0.4));transition:filter .4s ease;}
+  .scene-marker .marker-glow{fill:rgba(200,162,76,0.10);}
+  .scene-marker .figure-head{fill:var(--brass-soft);}
+  .scene-marker .figure-body{fill:var(--ivory-dim);}
+  .scene-marker.is-arrived{filter:drop-shadow(0 0 13px rgba(200,162,76,0.7));}
+  .scene-marker.is-arrived .figure-head,.scene-marker.is-arrived .figure-body{fill:var(--brass);}
+
+  .scene-progress-rail{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--line);z-index:2;}
+  .scene-progress-fill{height:100%;width:0%;background:var(--brass);}
+
+  .scene-overlays{position:absolute;inset:0;}
+  .scene-text{
+    position:absolute;left:0;bottom:2px;max-width:min(420px,52%);padding:26px 28px 24px;
+    background:linear-gradient(0deg, rgba(19,14,12,0.92) 12%, rgba(19,14,12,0.5) 65%, transparent 100%);
+    transition:opacity .18s ease;
+  }
+  .scene-text.is-swapping{opacity:0.12;}
+  .scene-text .tl-desc{max-width:36ch;}
+  .scene-stats{
+    position:absolute;right:0;bottom:2px;padding:26px 28px 24px;display:flex;flex-direction:column;gap:9px;align-items:flex-end;
+    background:linear-gradient(0deg, rgba(19,14,12,0.92) 12%, rgba(19,14,12,0.5) 65%, transparent 100%);
+  }
+  .scene-stat{opacity:0;text-align:right;}
+  .scene-stat .num{display:block;font-family:var(--serif);font-size:19px;font-weight:600;color:var(--brass-soft);}
+  .scene-stat .lbl{display:block;margin-top:1px;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted-2);}
+
+  /* account identities — Keeta / Meituan stage only; restrained overlay chips, not part of the SVG world */
+  .account-chips{
+    position:absolute;top:22px;left:0;right:0;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+    padding:0 28px;pointer-events:none;
+  }
+  .account-chip{
+    opacity:0;font-size:11px;letter-spacing:0.02em;color:var(--ivory-dim);
+    border:1px solid var(--line-strong);padding:5px 12px;background:rgba(19,14,12,0.55);
+    transition:border-color .3s ease,color .3s ease;
+  }
+  .account-chip.is-alfa{border-color:rgba(200,162,76,0.55);color:var(--brass-soft);}
+  .account-chip.is-dominant{font-size:12.5px;letter-spacing:0.03em;color:var(--brass-soft);border-color:var(--brass);padding:6px 16px;}
+
+  .scene-resolution{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    background:rgba(19,14,12,0.92);opacity:0;text-align:center;z-index:3;
+  }
+  .scene-resolve-line{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.6vw,38px);line-height:1.3;color:var(--brass-soft);}
+  .scene-resolve-sub{font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-2);}
 }
 
 /* ============ EXPERIENCE ============ */
@@ -585,7 +655,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
     <div class="profile-grid">
       <div class="profile-copy reveal">
         <p>Aaqib's career began in people operations and multi-unit restaurant management, progressing to <strong>Head of Operations</strong> for a multi-brand Saudi restaurant business before the online channel became the priority it is today.</p>
-        <p>That operating background was followed by two years inside <strong>Meituan / Keeta</strong> during its Saudi market expansion, managing strategic enterprise restaurant accounts and negotiating commission structures, promotions and growth plans from the platform side of the same relationships he now manages from the restaurant side.</p>
+        <p>That operating background was followed by two years inside <strong>Meituan / Keeta</strong> during its Saudi market expansion, progressing from Key Account Manager to Senior Account Manager and then Strategic Accounts Manager. His portfolio grew from major restaurant groups — Papa John's, Mama Noura and ALFA Group — to <strong>Americana Restaurants</strong>, where he held the strategic relationship across its multi-brand portfolio: first-hand exposure to commission structures, promotions and growth planning from the platform side of relationships he now manages from the operator side.</p>
         <p>He currently leads the delivery business for <strong>ALFA Co. / Al Faisaliah Group</strong> — a large-scale, multi-brand delivery P&amp;L spanning 13+ brands, 84+ locations and 250+ digital storefronts — turning brand-, location- and platform-level data into pricing, promotion and investment decisions, and resetting the business from growth-at-any-cost toward profitable, self-funded growth.</p>
       </div>
       <div class="principles reveal" aria-label="Operating principles">
@@ -671,7 +741,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
   </div>
 </section>
 
-<!-- ============ JOURNEY / SCROLL-DRIVEN CAREER NARRATIVE ============ -->
+<!-- ============ JOURNEY / CINEMATIC CAREER SCENE ============ -->
 <section id="journey">
   <div class="wrap">
     <div class="section-head reveal">
@@ -681,142 +751,196 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
     </div>
   </div>
 
-  <!-- Static fallback: shown on mobile/tablet and whenever reduced motion is requested.
-       Contains the complete narrative in plain readable form — the scroll animation
-       below is a progressive enhancement layered on top of this, never a replacement for it. -->
+  <!-- Mobile / tablet / reduced-motion: an elegant vertical progression. Shown instead of
+       the cinematic scene below via CSS alone (see the compound media query in the stylesheet) —
+       the full narrative always exists here in plain readable form. -->
   <div class="wrap journey-fallback">
-    <div class="timeline reveal">
-      <div class="tl-item is-current">
-        <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-era">Commercial P&amp;L Leadership</div>
-        <div class="tl-dates">March 2026 — Present</div>
-        <h3 class="tl-title">Head of Delivery</h3>
-        <p class="tl-org">ALFA Co. / Al Faisaliah Group · Riyadh</p>
-        <p class="tl-desc">Full delivery P&amp;L and commercial ownership across a 13-brand, 84+ location portfolio — resetting the business from growth funded by subsidy to growth funded by itself, at the point where operating discipline and platform fluency meet.</p>
+    <div class="mobile-journey reveal">
+      <div class="mj-stage">
+        <span class="tl-era">2012 – 2020</span>
+        <h3 class="tl-title">The Operating Years</h3>
+        <p class="tl-desc">People. Teams. Customers. Execution.</p>
       </div>
-
-      <div class="tl-item">
-        <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-era">Marketplace / Platform</div>
-        <div class="tl-dates">August 2024 — February 2026</div>
-        <h3 class="tl-title">Strategic Accounts Manager</h3>
-        <p class="tl-org">Meituan · Keeta · Riyadh</p>
-        <p class="tl-desc">Owned commercial relationships for a portfolio of strategic enterprise restaurant accounts during Keeta's Saudi expansion — the platform-side mirror of the aggregator relationships now managed from the restaurant side.</p>
-        <div class="tl-progress" aria-label="Role progression">
-          <span>Key Account Manager</span><span>Senior Key Account Manager</span><span>Strategic Accounts Manager</span>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-era">Multi-Unit Operations Leadership</div>
-        <div class="tl-dates">January 2021 — August 2024</div>
-        <h3 class="tl-title">Head of Operations</h3>
-        <p class="tl-org">Food Basics Co. (incl. Hamburgini) · Riyadh</p>
-        <p class="tl-desc">Progressed from training &amp; staffing into regional operations and enterprise-wide operational strategy across a multi-brand restaurant business.</p>
+      <div class="mj-arrow" aria-hidden="true">↓</div>
+      <div class="mj-stage">
+        <!-- logo: Food Basics / Hamburgini — text treatment; replace with brand assets if available -->
+        <span class="tl-era">2021 – 2024</span>
+        <h3 class="tl-title">Restaurant Operations</h3>
+        <p class="tl-desc">Food Basics · Hamburgini</p>
         <div class="tl-progress" aria-label="Role progression">
           <span>Assistant Operations Manager</span><span>Regional Manager / Operations Consultant</span><span>Head of Operations</span>
         </div>
       </div>
-
-      <div class="tl-item">
-        <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-era">People &amp; Operations Foundation</div>
-        <div class="tl-dates">2012 — 2020</div>
-        <h3 class="tl-title">HR &amp; Workforce Operations</h3>
-        <p class="tl-org">Al-Nayfat Co. · Cercon General Contractors · Hotel Relax Inn</p>
-        <p class="tl-desc">Eight years across HR administration and specialist roles — compensation, compliance, recruitment and workforce operations for multi-site employers in Saudi Arabia and India — the operating grounding beneath everything since.</p>
+      <div class="mj-arrow" aria-hidden="true">↓</div>
+      <div class="mj-stage">
+        <!-- logo: Meituan / Keeta — text treatment; replace with brand assets if available -->
+        <span class="tl-era">2024 – 2026</span>
+        <h3 class="tl-title">Meituan · Keeta</h3>
+        <p class="tl-desc">"From operating restaurants to understanding the marketplace from inside."</p>
+        <div class="tl-progress" aria-label="Role progression">
+          <span>Key Account Manager</span><span>Senior Account Manager</span><span>Strategic Accounts Manager</span>
+        </div>
+        <!-- logo: Papa John's / Mama Noura / ALFA Group / Americana Restaurants — text treatment; replace with brand assets if available -->
+        <div class="mj-accounts">
+          <p class="mj-account-row"><b>Senior Account Manager:</b> Papa John's · Mama Noura · ALFA Group</p>
+          <p class="mj-account-row"><b>Strategic Accounts Manager:</b> Americana Restaurants — across its multi-brand portfolio</p>
+        </div>
+      </div>
+      <div class="mj-arrow" aria-hidden="true">↓</div>
+      <div class="mj-stage">
+        <!-- logo: ALFA Co. / Al Faisaliah Group — text treatment; replace with brand assets if available -->
+        <span class="tl-era">2026 — Present</span>
+        <h3 class="tl-title">Head of Delivery</h3>
+        <p class="tl-desc">ALFA Co. / Al Faisaliah Group</p>
+        <div class="tl-progress mj-stats" aria-label="Scale">
+          <span>13+ Brands</span><span>84+ Locations</span><span>250+ Revenue Centres</span><span>~1M Annual Orders</span>
+        </div>
+      </div>
+      <div class="mj-resolution">
+        <p class="mj-resolve-line">Operator. Platform. P&amp;L.</p>
+        <p class="mj-resolve-sub">Both sides of the marketplace.</p>
       </div>
     </div>
   </div>
 
-  <!-- Scroll-driven version: desktop viewports with no motion-reduction preference only
-       (see the compound media query in the stylesheet). A sticky route diagram tracks
-       scroll position while four career chapters advance beside it. -->
+  <!-- Cinematic scroll scene: desktop viewports with no motion-reduction preference only.
+       A single normalized scroll-progress value (0–1) drives the camera pan, the travelling
+       figure, every environment element's opacity, the account-identity chips, the text
+       panel's content, the stat reveals and the final resolution — one shared model, so
+       what's on screen always matches what's read, forward or in reverse. -->
   <div class="scrolly" id="scrolly">
-    <div class="wrap scrolly-inner">
-      <div class="scrolly-visual" aria-hidden="true">
-        <div class="scrolly-visual-frame">
-          <svg class="scrolly-svg" viewBox="0 0 160 700" preserveAspectRatio="xMidYMid meet">
-            <!-- Environment motifs: each group is a restrained abstraction of one career
-                 chapter. They build up cumulatively as the route is travelled — is-current
-                 (full presence), is-passed (receded but visible), is-upcoming (hidden) —
-                 so the surroundings evolve with the journey instead of just the marker. -->
-            <g class="scrolly-env" data-env="0" aria-hidden="true">
-              <path d="M80,58 L58,90 M80,58 L102,90 M80,58 L80,120"/>
-              <circle cx="80" cy="58" r="3.2"/>
-              <circle cx="58" cy="92" r="2.4"/>
-              <circle cx="102" cy="92" r="2.4"/>
-              <circle cx="80" cy="122" r="2.4"/>
+    <div class="scrolly-pin">
+      <div class="wrap scrolly-pin-inner">
+        <div class="scene-frame">
+          <svg class="scene-svg" viewBox="0 0 900 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g id="sceneCamera">
+              <path class="scene-road" d="M0,340 L3400,340"/>
+              <path class="scene-road-traveled" d="M0,340 L300,340"/>
+
+              <!-- Opening — The Operating Years: a brief montage. Not an org chart, not an
+                   HR scene — a few informal colleagues, a service counter, a checklist,
+                   an early laptop/report. Establishes "built from the ground up" quickly. -->
+              <g class="opening-el" data-o="0" transform="translate(380,322)">
+                <circle class="team-dot" cx="0" cy="0" r="3"/>
+                <circle class="team-dot" cx="13" cy="5" r="3"/>
+                <circle class="team-dot" cx="-11" cy="7" r="3"/>
+              </g>
+              <g class="opening-el" data-o="1" transform="translate(430,322)">
+                <rect class="counter-body" x="-16" y="-4" width="32" height="10" rx="1"/>
+                <circle class="counter-customer" cx="24" cy="0" r="3"/>
+              </g>
+              <g class="opening-el" data-o="2" transform="translate(480,320)">
+                <rect class="checklist-body" x="-8" y="-14" width="16" height="20" rx="1"/>
+                <path class="checklist-tick" d="M-4,-8 l2,2 l4,-4 M-4,-2 l2,2 l4,-4 M-4,4 l2,2 l4,-4"/>
+              </g>
+              <g class="opening-el" data-o="3" transform="translate(530,324)">
+                <rect class="early-laptop-body" x="-14" y="4" width="28" height="3" rx="1"/>
+                <rect class="early-laptop-screen" x="-11" y="-14" width="22" height="18" rx="1.5"/>
+              </g>
+
+              <!-- Scene 2 — Restaurant Operations: storefronts that grow with scope, each
+                   paired with a dormant node that will "go digital" in Scene 3 -->
+              <g class="rest-building" data-b="0">
+                <rect x="770" y="295" width="30" height="45" rx="2"/>
+                <!-- logo: Food Basics -->
+                <text class="storefront-label" x="785" y="288" text-anchor="middle">Food Basics</text>
+              </g>
+              <g class="rest-building" data-b="1"><rect x="825" y="282" width="30" height="58" rx="2"/></g>
+              <g class="rest-building" data-b="2">
+                <rect x="880" y="270" width="30" height="70" rx="2"/>
+                <!-- logo: Hamburgini -->
+                <text class="storefront-label" x="895" y="263" text-anchor="middle">Hamburgini</text>
+              </g>
+              <g class="rest-building" data-b="3"><rect x="935" y="258" width="30" height="82" rx="2"/></g>
+              <g class="rest-node" transform="translate(785,295)"><circle r="4"/></g>
+              <g class="rest-node" transform="translate(840,282)"><circle r="4"/></g>
+              <g class="rest-node" transform="translate(895,270)"><circle r="4"/></g>
+              <g class="rest-node" transform="translate(950,258)"><circle r="4"/></g>
+
+              <!-- Scene 3 — Meituan / Keeta: the same locations become digital nodes,
+                   connecting into a marketplace / data environment — operator → platform -->
+              <g class="scene-network">
+                <path class="net-link" d="M785,295 L1395,267"/>
+                <path class="net-link" d="M840,282 L1395,267"/>
+                <path class="net-link" d="M895,270 L1395,267"/>
+                <path class="net-link" d="M950,258 L1395,267"/>
+                <rect class="laptop-body" x="1360" y="284" width="70" height="5" rx="1.5"/>
+                <rect class="laptop-screen" x="1370" y="250" width="50" height="34" rx="2"/>
+                <circle class="net-node" cx="1395" cy="267" r="3"/>
+                <!-- logo: Meituan / Keeta -->
+                <text class="keeta-mark" x="1395" y="235" text-anchor="middle">Meituan · Keeta</text>
+              </g>
+
+              <!-- Scene 4 — ALFA: an executive environment. The figure stands beside a
+                   screen; stakeholders are seated around the table — not at its head. -->
+              <g class="scene-cluster is-alfa" data-cluster="alfa">
+                <!-- logo: Steak House / Piatto / Fire Grill / Earth Bowlz — flagship ALFA restaurant brands -->
+                <text class="brand-stack-label" x="1980" y="240">Restaurant Brands</text>
+                <text class="brand-stack-item" x="1980" y="258">Steak House</text>
+                <text class="brand-stack-item" x="1980" y="274">Piatto</text>
+                <text class="brand-stack-item" x="1980" y="290">Fire Grill</text>
+                <text class="brand-stack-item" x="1980" y="306">Earth Bowlz</text>
+
+                <ellipse class="board-table" cx="2130" cy="345" rx="85" ry="18"/>
+                <circle class="board-seat" cx="2075" cy="338" r="3"/>
+                <circle class="board-seat" cx="2100" cy="357" r="3"/>
+                <circle class="board-seat" cx="2160" cy="357" r="3"/>
+                <circle class="board-seat" cx="2185" cy="338" r="3"/>
+
+                <!-- logo: ALFA Co. / Al Faisaliah Group -->
+                <rect class="board-screen" x="2280" y="258" width="56" height="76" rx="2"/>
+                <text class="board-mark" x="2308" y="300" text-anchor="middle">ALFA</text>
+
+                <!-- logo: HungerStation / Jahez / Keeta / Ninja — the marketplace platforms the business trades across -->
+                <text class="brand-stack-label" x="2400" y="240">Marketplace Platforms</text>
+                <text class="brand-stack-item" x="2400" y="258">HungerStation</text>
+                <text class="brand-stack-item" x="2400" y="274">Jahez</text>
+                <text class="brand-stack-item" x="2400" y="290">Keeta</text>
+                <text class="brand-stack-item" x="2400" y="306">Ninja</text>
+
+                <path class="pnl-bars" d="M2450,340 v-14 M2465,340 v-22 M2480,340 v-32 M2495,340 v-44"/>
+              </g>
             </g>
-            <g class="scrolly-env" data-env="1" aria-hidden="true">
-              <rect x="12" y="172" width="13" height="13" rx="1.5"/>
-              <rect x="34" y="193" width="13" height="13" rx="1.5"/>
-              <rect x="8" y="214" width="13" height="13" rx="1.5"/>
-              <rect x="30" y="235" width="13" height="13" rx="1.5"/>
-              <path d="M20,186 L40,200 M40,207 L15,221 M15,228 L37,242"/>
+
+            <!-- the travelling figure: fixed on screen — a restrained editorial silhouette,
+                 not a literal portrait. The business environment around it grows in scale
+                 and seniority; the figure itself does not change. -->
+            <g class="scene-marker" id="sceneMarker" transform="translate(300,340)">
+              <circle class="marker-glow" cy="-20" r="16"/>
+              <circle class="figure-head" cy="-34" r="5"/>
+              <path class="figure-body" d="M-8,-27 Q0,-31 8,-27 L10,-2 Q0,3 -10,-2 Z"/>
             </g>
-            <g class="scrolly-env" data-env="2" aria-hidden="true">
-              <path d="M130,400 L104,378 M130,400 L108,426 M130,400 L150,373 M130,400 L153,422 M130,400 L130,442"/>
-              <circle cx="130" cy="400" r="4"/>
-              <circle cx="104" cy="378" r="2.4"/>
-              <circle cx="108" cy="426" r="2.4"/>
-              <circle cx="150" cy="373" r="2.4"/>
-              <circle cx="153" cy="422" r="2.4"/>
-              <circle cx="130" cy="442" r="2.4"/>
-            </g>
-            <g class="scrolly-env" data-env="3" aria-hidden="true">
-              <path class="env-bars" d="M56,652 v18 M68,640 v30 M80,626 v44 M92,612 v58 M104,598 v72"/>
-              <path d="M50,672 L108,672"/>
-            </g>
-            <path class="scrolly-path" d="M80,20 C80,120 30,150 30,260 C30,370 130,380 130,470 C130,560 90,580 90,680" />
-            <g class="scrolly-node" data-node="0" transform="translate(80,20)"><circle r="5"/></g>
-            <g class="scrolly-node" data-node="1" transform="translate(30,260)"><circle r="5"/></g>
-            <g class="scrolly-node" data-node="2" transform="translate(130,470)"><circle r="5"/></g>
-            <g class="scrolly-node" data-node="3" transform="translate(90,680)"><circle r="5"/></g>
-            <circle class="scrolly-marker" cx="80" cy="20" r="7"/>
           </svg>
-          <div class="scrolly-node-label" data-node-label="0" style="top:3%;">Foundation</div>
-          <div class="scrolly-node-label" data-node-label="1" style="top:37%;">Operations</div>
-          <div class="scrolly-node-label" data-node-label="2" style="top:67%;">Platform</div>
-          <div class="scrolly-node-label" data-node-label="3" style="top:97%;">P&amp;L</div>
-        </div>
-        <p class="scrolly-tagline">Operator. Platform. P&amp;L.</p>
-      </div>
 
-      <div class="scrolly-stages">
-        <div class="scrolly-stage" data-stage="0">
-          <span class="tl-era">Stage 01 · Foundation</span>
-          <h3 class="tl-title">People, first</h3>
-          <p class="tl-dates">2012 — 2020 · Al-Nayfat Co. · Cercon General Contractors · Hotel Relax Inn</p>
-          <p class="tl-desc">Eight years across HR administration and workforce operations — compensation, compliance, recruitment — for multi-site employers in Saudi Arabia and India. The operating grounding beneath everything since.</p>
-        </div>
-
-        <div class="scrolly-stage" data-stage="1">
-          <span class="tl-era">Stage 02 · Restaurant Operations</span>
-          <h3 class="tl-title">Onto the restaurant floor</h3>
-          <p class="tl-dates">January 2021 — August 2024 · Food Basics Co. (incl. Hamburgini)</p>
-          <p class="tl-desc">Promoted twice in three years — Assistant Operations Manager → Regional Manager / Operations Consultant → Head of Operations. Multi-unit, multi-brand operations: systems, staffing, cost discipline, execution.</p>
-          <div class="tl-progress" aria-label="Role progression">
-            <span>Assistant Operations Manager</span><span>Regional Manager / Operations Consultant</span><span>Head of Operations</span>
+          <!-- account identities — Meituan / Keeta stage only; text treatment, replace with brand assets if available -->
+          <div class="account-chips" id="accountChips" aria-hidden="true">
+            <span class="account-chip" id="chipPapaJohns">Papa John's</span>
+            <span class="account-chip" id="chipMamaNoura">Mama Noura</span>
+            <span class="account-chip" id="chipAlfaGroup">ALFA Group</span>
+            <span class="account-chip" id="chipAmericana">Americana Restaurants</span>
           </div>
-        </div>
 
-        <div class="scrolly-stage" data-stage="2">
-          <span class="tl-era">Stage 03 · Marketplace Platform</span>
-          <h3 class="tl-title">Operator becomes platform</h3>
-          <p class="tl-dates">August 2024 — February 2026 · Meituan · Keeta</p>
-          <p class="tl-desc">Moved inside a food-delivery marketplace during its Saudi expansion — the restaurant environment giving way to a network of accounts, commission structures and growth plans. Marketplace economics learned from inside the platform.</p>
-          <div class="tl-progress" aria-label="Role progression">
-            <span>Key Account Manager</span><span>Senior Key Account Manager</span><span>Strategic Accounts Manager</span>
+          <div class="scene-progress-rail" aria-hidden="true"><div class="scene-progress-fill" id="sceneProgressFill"></div></div>
+
+          <div class="scene-overlays">
+            <div class="scene-text" id="sceneText">
+              <span class="tl-era" id="sceneEra">2012 – 2020</span>
+              <h3 class="tl-title" id="sceneTitle">The Operating Years</h3>
+              <p class="tl-desc" id="sceneSub">People. Teams. Customers. Execution.</p>
+              <div class="tl-progress" id="sceneProgressList" aria-label="Role progression"></div>
+            </div>
+            <div class="scene-stats" id="sceneStats">
+              <div class="scene-stat"><span class="num">13+</span><span class="lbl">Brands</span></div>
+              <div class="scene-stat"><span class="num">84+</span><span class="lbl">Locations</span></div>
+              <div class="scene-stat"><span class="num">250+</span><span class="lbl">Revenue Centres</span></div>
+              <div class="scene-stat"><span class="num">~1M</span><span class="lbl">Annual Orders</span></div>
+            </div>
           </div>
-        </div>
 
-        <div class="scrolly-stage" data-stage="3">
-          <span class="tl-era">Stage 04 · Commercial P&amp;L Leadership</span>
-          <h3 class="tl-title">Both sides, one P&amp;L</h3>
-          <p class="tl-dates">March 2026 — Present · ALFA Co. / Al Faisaliah Group</p>
-          <p class="tl-desc">Back on the operator side, now with the platform's economics built in. Full delivery P&amp;L across 13+ brands, 84+ locations and 250+ digital storefronts — analytics, aggregator economics and executive decision-making in one seat.</p>
+          <div class="scene-resolution" id="sceneResolution">
+            <p class="scene-resolve-line">Operator.<br>Platform.<br>P&amp;L.</p>
+            <p class="scene-resolve-sub">Both sides of the marketplace.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1130,62 +1254,204 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
     });
   });
 
-  // Scroll-driven career journey — desktop, motion-enabled viewports only.
+  // Cinematic career journey — desktop, motion-enabled viewports only.
   // The complete narrative already exists as plain readable text in .journey-fallback
   // (shown instead of this on mobile/tablet or when reduced motion is requested, via
-  // CSS alone), so this block only ever adds an ambient visual layer on top of it.
+  // CSS alone). Everything below is driven from ONE normalized scroll-progress value
+  // (0..1) — camera pan, the travelling figure, environment opacities, the account-
+  // identity chips, the text panel's content, the stat reveals and the final
+  // resolution — so the visual and the text are never out of sync, forward or reversed.
   var scrollyEl = document.getElementById('scrolly');
   var scrollyIsWide = window.matchMedia && window.matchMedia('(min-width:981px)').matches;
   if(scrollyEl && !reduceMotion && scrollyIsWide){
-    var scrollyVisual = scrollyEl.querySelector('.scrolly-visual');
-    var scrollyPath = scrollyEl.querySelector('.scrolly-path');
-    var scrollyMarker = scrollyEl.querySelector('.scrolly-marker');
-    var scrollyNodes = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-node'));
-    var scrollyLabels = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-node-label'));
-    var scrollyStages = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-stage'));
-    var scrollyEnvLayers = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-env'));
+    var sceneCamera = document.getElementById('sceneCamera');
+    var sceneMarker = document.getElementById('sceneMarker');
+    var sceneProgressFill = document.getElementById('sceneProgressFill');
+    var sceneText = document.getElementById('sceneText');
+    var sceneEra = document.getElementById('sceneEra');
+    var sceneTitle = document.getElementById('sceneTitle');
+    var sceneSub = document.getElementById('sceneSub');
+    var sceneProgressList = document.getElementById('sceneProgressList');
+    var sceneResolution = document.getElementById('sceneResolution');
+    var sceneOverlays = scrollyEl.querySelector('.scene-overlays');
+    var roadTraveled = scrollyEl.querySelector('.scene-road-traveled');
+    var openingEls = Array.prototype.slice.call(scrollyEl.querySelectorAll('.opening-el'));
+    var restBuildings = Array.prototype.slice.call(scrollyEl.querySelectorAll('.rest-building'));
+    var restNodes = Array.prototype.slice.call(scrollyEl.querySelectorAll('.rest-node'));
+    var networkGroup = scrollyEl.querySelector('.scene-network');
+    var alfaCluster = scrollyEl.querySelector('[data-cluster="alfa"]');
+    var statEls = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scene-stat'));
+    var chipPP = document.getElementById('chipPapaJohns');
+    var chipMN = document.getElementById('chipMamaNoura');
+    var chipALFA = document.getElementById('chipAlfaGroup');
+    var chipAM = document.getElementById('chipAmericana');
 
-    if(scrollyPath && scrollyMarker && scrollyStages.length){
-      var pathLength = scrollyPath.getTotalLength();
+    if(sceneCamera && sceneMarker){
+      var PAN_RANGE = 2400;
+      var MARKER_X = 300;
+      var RES_START = 0.95;
+      // The Operating Years is deliberately brief (~12% of the journey) — a quick opening
+      // montage, not a chapter that competes with the main career story. Restaurant
+      // Operations, Meituan/Keeta and ALFA each get progressively more scroll room, so
+      // the journey feels richer and more consequential as it advances.
+      var STAGES = [
+        { start:0.00, end:0.12, era:'2012 – 2020', title:'The Operating Years', sub:'People. Teams. Customers. Execution.', chips:null },
+        { start:0.12, end:0.35, era:'2021 – 2024', title:'Restaurant Operations', sub:'Food Basics · Hamburgini', chips:['Assistant Operations Manager','Regional Manager / Operations Consultant','Head of Operations'] },
+        { start:0.35, end:0.44, era:'2024 – 2026', title:'Key Account Manager', sub:'Meituan · Keeta — entering the marketplace side of the business.', chips:['Key Account Manager','Senior Account Manager','Strategic Accounts Manager'] },
+        { start:0.44, end:0.56, era:'2024 – 2026', title:'Senior Account Manager', sub:"Enterprise accounts: Papa John's, Mama Noura, ALFA Group.", chips:['Key Account Manager','Senior Account Manager','Strategic Accounts Manager'] },
+        { start:0.56, end:0.65, era:'2024 – 2026', title:'Strategic Accounts Manager', sub:'Americana Restaurants — across its multi-brand portfolio.', chips:['Key Account Manager','Senior Account Manager','Strategic Accounts Manager'] },
+        { start:0.65, end:0.95, era:'2026 — Present', title:'Head of Delivery', sub:'ALFA Co. / Al Faisaliah Group', chips:null }
+      ];
+
+      var clamp01 = function(v){ return Math.max(0, Math.min(1, v)); };
+      var lerp = function(a,b,t){ return a + (b - a) * t; };
+
+      function stageIndexFor(p){
+        for(var i = 0; i < STAGES.length; i++){
+          if(p < STAGES[i].end || i === STAGES.length - 1) return i;
+        }
+        return STAGES.length - 1;
+      }
+
+      function stageOpacity(p, start, end, floor){
+        var lead = 0.04;
+        if(p < start - lead) return 0;
+        if(p < start) return clamp01((p - (start - lead)) / lead);
+        if(p <= end) return 1;
+        return lerp(1, floor, clamp01((p - end) / 0.08));
+      }
+
+      function updateText(idx){
+        var s = STAGES[idx];
+        sceneEra.textContent = s.era;
+        sceneTitle.textContent = s.title;
+        sceneSub.textContent = s.sub;
+        if(s.chips && s.chips.length){
+          sceneProgressList.innerHTML = s.chips.map(function(c){ return '<span>' + c + '</span>'; }).join('');
+          sceneProgressList.style.display = 'flex';
+        } else {
+          sceneProgressList.innerHTML = '';
+          sceneProgressList.style.display = 'none';
+        }
+      }
+
+      var lastStageIdx = -1;
+      var swapTimer = null;
       var tickingScrolly = false;
 
-      function updateScrollyMarker(){
+      function updateScene(){
         tickingScrolly = false;
         var rect = scrollyEl.getBoundingClientRect();
         var total = scrollyEl.offsetHeight - window.innerHeight;
         var scrolled = -rect.top;
-        var progress = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
-        var pt = scrollyPath.getPointAtLength(progress * pathLength);
-        scrollyMarker.setAttribute('cx', pt.x);
-        scrollyMarker.setAttribute('cy', pt.y);
+        var progress = total > 0 ? clamp01(scrolled / total) : 0;
+
+        // camera: the single value that makes the environment "travel" past the fixed figure
+        var offset = progress * PAN_RANGE;
+        sceneCamera.setAttribute('transform', 'translate(' + (-offset) + ',0)');
+        if(roadTraveled){ roadTraveled.setAttribute('d', 'M0,340 L' + (offset + MARKER_X) + ',340'); }
+        if(sceneProgressFill){ sceneProgressFill.style.width = (progress * 100) + '%'; }
+
+        // Opening — The Operating Years: a quick staggered montage that recedes
+        // completely once the main career story (Restaurant Operations) begins.
+        openingEls.forEach(function(el, i){
+          var within = clamp01((progress - i * 0.02) / 0.05);
+          var recede = progress > 0.12 ? lerp(1, 0, clamp01((progress - 0.12) / 0.06)) : 1;
+          el.style.opacity = within * recede;
+        });
+
+        // Scene 2 — Restaurant Operations: storefronts appear with staggered scope —
+        // one location becomes several as responsibility grows.
+        var restStart = 0.12;
+        restBuildings.forEach(function(b, i){
+          var within = clamp01((progress - (restStart + i * 0.04)) / 0.10);
+          b.style.opacity = within;
+        });
+
+        // those same locations become digital nodes — once formed, they never disappear
+        var restEnd = 0.35;
+        var nodesOp = clamp01((progress - (restEnd - 0.05)) / 0.10);
+        restNodes.forEach(function(n){ n.style.opacity = nodesOp; });
+
+        // Scene 3 — Meituan / Keeta: the marketplace / data environment forms and persists
+        if(networkGroup){ networkGroup.style.opacity = clamp01((progress - 0.31) / 0.14); }
+
+        // account identities — Senior Account Manager: Papa John's & Mama Noura appear
+        // together and recede together as Strategic Accounts Manager arrives
+        var ppmnOp = 0;
+        if(progress < 0.44){ ppmnOp = 0; }
+        else if(progress < 0.48){ ppmnOp = clamp01((progress - 0.44) / 0.04); }
+        else if(progress < 0.56){ ppmnOp = 1; }
+        else if(progress < 0.595){ ppmnOp = lerp(1, 0, clamp01((progress - 0.56) / 0.035)); }
+        else { ppmnOp = 0; }
+        if(chipPP){ chipPP.style.opacity = ppmnOp; }
+        if(chipMN){ chipMN.style.opacity = ppmnOp; }
+
+        // ALFA Group — appears as one of the Senior Account Manager partners, then
+        // persists distinctly through Strategic Accounts Manager and crossfades into
+        // the operator-side identity as the boardroom scene arrives. The transition
+        // itself carries the platform-side → operator-side story, not the text.
+        var alfaChipOp = 0;
+        if(progress < 0.44){ alfaChipOp = 0; }
+        else if(progress < 0.48){ alfaChipOp = clamp01((progress - 0.44) / 0.04); }
+        else if(progress < 0.68){ alfaChipOp = 1; }
+        else if(progress < 0.75){ alfaChipOp = lerp(1, 0, clamp01((progress - 0.68) / 0.07)); }
+        else { alfaChipOp = 0; }
+        if(chipALFA){
+          chipALFA.style.opacity = alfaChipOp;
+          chipALFA.classList.toggle('is-alfa', progress >= 0.56);
+        }
+
+        // Americana Restaurants — the dominant Strategic Accounts Manager relationship,
+        // recedes first as the ALFA scene begins arriving, leaving ALFA alone for a beat
+        // before ALFA itself crossfades into the boardroom's own identity
+        var amOp = 0;
+        if(progress < 0.56){ amOp = 0; }
+        else if(progress < 0.595){ amOp = clamp01((progress - 0.56) / 0.035); }
+        else if(progress < 0.65){ amOp = 1; }
+        else if(progress < 0.68){ amOp = lerp(1, 0, clamp01((progress - 0.65) / 0.03)); }
+        else { amOp = 0; }
+        if(chipAM){
+          chipAM.style.opacity = amOp;
+          chipAM.classList.toggle('is-dominant', progress >= 0.56);
+        }
+
+        // Scene 4 — ALFA: the executive boardroom arrives as the marketplace-side
+        // accounts recede — restaurant brands and platform identities frame the figure
+        if(alfaCluster){ alfaCluster.style.opacity = clamp01((progress - 0.65) / 0.10); }
+
+        // figure: a quiet "arrival" state right at the destination
+        sceneMarker.classList.toggle('is-arrived', progress > 0.97);
+
+        // the ONE text area — content swaps only when the stage actually changes
+        var idx = stageIndexFor(progress);
+        if(idx !== lastStageIdx){
+          if(sceneText){ sceneText.classList.add('is-swapping'); }
+          updateText(idx);
+          if(swapTimer){ clearTimeout(swapTimer); }
+          swapTimer = setTimeout(function(){ if(sceneText){ sceneText.classList.remove('is-swapping'); } }, 90);
+          lastStageIdx = idx;
+        }
+
+        // scale stats — staggered reveal, ALFA stage only
+        var alfaLocal = clamp01((progress - 0.65) / (0.95 - 0.65));
+        statEls.forEach(function(el, i){
+          el.style.opacity = clamp01((alfaLocal - (0.10 + i * 0.20)) / 0.18);
+        });
+
+        // the arrival: text/stats recede as the resolution plate takes over — same value, inverse
+        var resolutionT = clamp01((progress - RES_START) / (1 - RES_START));
+        if(sceneResolution){ sceneResolution.style.opacity = resolutionT; }
+        if(sceneOverlays){ sceneOverlays.style.opacity = 1 - resolutionT; }
       }
+
       function onScrollyScroll(){
-        if(!tickingScrolly){ tickingScrolly = true; requestAnimationFrame(updateScrollyMarker); }
+        if(!tickingScrolly){ tickingScrolly = true; requestAnimationFrame(updateScene); }
       }
       window.addEventListener('scroll', onScrollyScroll, { passive: true });
       window.addEventListener('resize', onScrollyScroll);
-      updateScrollyMarker();
-
-      if('IntersectionObserver' in window){
-        scrollyEl.classList.add('scrolly-js');
-        var scrollyObserver = new IntersectionObserver(function(entries){
-          entries.forEach(function(entry){
-            if(!entry.isIntersecting) return;
-            var idx = scrollyStages.indexOf(entry.target);
-            if(idx === -1) return;
-            scrollyStages.forEach(function(s,i){ s.classList.toggle('is-active', i === idx); });
-            scrollyNodes.forEach(function(n,i){ n.classList.toggle('is-reached', i <= idx); });
-            scrollyLabels.forEach(function(l,i){ l.classList.toggle('is-reached', i <= idx); });
-            scrollyEnvLayers.forEach(function(env,i){
-              env.classList.toggle('is-current', i === idx);
-              env.classList.toggle('is-passed', i < idx);
-              env.classList.toggle('is-upcoming', i > idx);
-            });
-            if(scrollyVisual){ scrollyVisual.classList.toggle('is-resolved', idx === scrollyStages.length - 1); }
-          });
-        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-        scrollyStages.forEach(function(s){ scrollyObserver.observe(s); });
-      }
+      scrollyEl.classList.add('scrolly-js');
+      updateScene();
     }
   }
 })();
