@@ -7,24 +7,23 @@
 <meta name="description" content="Aaqib Yaqoob — Head of Delivery, ALFA Co. / Al Faisaliah Group. Restaurant operations, marketplace platform experience, and P&amp;L ownership across a 13-brand delivery business in Saudi Arabia.">
 <meta name="theme-color" content="#150f0d">
 <meta name="robots" content="index, follow">
-<!-- IMPORTANT: replace REPLACE-WITH-YOUR-URL below with your live GitHub Pages
-     address (e.g. https://username.github.io/ or a custom domain) once published. -->
-<link rel="canonical" href="https://REPLACE-WITH-YOUR-URL/">
+<!-- Canonical / social URLs set to https://aaqib-yaqoob.github.io/Portfolio/ -->
+<link rel="canonical" href="https://aaqib-yaqoob.github.io/Portfolio/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aaqib Yaqoob | Head of Delivery — Commercial &amp; Digital Commerce Leadership">
 <meta property="og:description" content="Restaurant operations, marketplace platform experience, and P&amp;L ownership across a 13-brand delivery business in Saudi Arabia.">
-<meta property="og:url" content="https://REPLACE-WITH-YOUR-URL/">
+<meta property="og:url" content="https://aaqib-yaqoob.github.io/Portfolio/">
 <meta property="og:site_name" content="Aaqib Yaqoob">
 <!-- Add a 1200x630 image named og-image.jpg to the repo root, then uncomment the line below -->
-<!-- <meta property="og:image" content="https://REPLACE-WITH-YOUR-URL/og-image.jpg"> -->
+<!-- <meta property="og:image" content="https://aaqib-yaqoob.github.io/Portfolio/og-image.jpg"> -->
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Aaqib Yaqoob | Head of Delivery — Commercial &amp; Digital Commerce Leadership">
 <meta name="twitter:description" content="Restaurant operations, marketplace platform experience, and P&amp;L ownership across a 13-brand delivery business in Saudi Arabia.">
-<!-- <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-URL/og-image.jpg"> -->
+<!-- <meta name="twitter:image" content="https://aaqib-yaqoob.github.io/Portfolio/og-image.jpg"> -->
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23150f0d'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' fill='%23c9a24a' text-anchor='middle'%3EAY%3C/text%3E%3C/svg%3E">
 
@@ -250,6 +249,26 @@ nav.primary-nav a.active{color:var(--brass-soft);border-bottom-color:var(--brass
 .impact-card .tag{font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--brass);font-weight:700;}
 .impact-card h3{font-size:19px;line-height:1.3;margin-top:2px;}
 .impact-card p{font-size:14.5px;color:var(--muted);line-height:1.7;}
+.case-study + .impact-grid{margin-top:clamp(36px,4.5vw,48px);}
+
+/* Executive impact band (reuses .kpi-strip / .kpi-grid / .kpi) */
+.kpi-strip--impact{margin-top:10px;}
+.impact-narrative{margin-top:20px;font-family:var(--serif);font-size:clamp(16px,1.8vw,19px);font-style:italic;color:var(--ivory-dim);max-width:68ch;line-height:1.5;}
+
+/* Signature case study */
+.case-study{margin-top:clamp(40px,5vw,56px);border:1px solid var(--line);padding:clamp(24px,3.5vw,40px);background:rgba(255,255,255,0.014);}
+.case-head{margin-bottom:clamp(22px,3vw,30px);}
+.case-head .eyebrow{display:block;margin-bottom:8px;}
+.case-head h3{font-size:clamp(22px,2.6vw,28px);}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,36px);}
+.case-col .case-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:10px;}
+.case-col p{font-size:14.5px;color:var(--muted);line-height:1.7;}
+.case-reset-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.case-reset-list li{position:relative;padding-left:16px;font-size:14.5px;color:var(--muted);line-height:1.65;}
+.case-reset-list li::before{content:"–";position:absolute;left:0;color:var(--brass);}
+.case-result-row{display:flex;flex-wrap:wrap;gap:10px 20px;}
+.case-result-row span{font-family:var(--serif);font-size:15px;color:var(--brass-soft);white-space:nowrap;}
+.case-close{margin-top:clamp(24px,3.5vw,32px);padding-top:clamp(18px,2.5vw,24px);border-top:1px solid var(--line);font-family:var(--serif);font-size:clamp(17px,1.9vw,20px);font-style:italic;color:var(--ivory);}
 
 /* ============ JOURNEY / TIMELINE ============ */
 .timeline{position:relative;margin-top:8px;}
@@ -273,6 +292,45 @@ nav.primary-nav a.active{color:var(--brass-soft);border-bottom-color:var(--brass
   font-size:11.5px;color:var(--ivory-dim);border:1px solid var(--line-strong);padding:4px 10px;letter-spacing:0.01em;
 }
 .tl-progress span:not(:last-child)::after{content:"→";margin-left:8px;color:var(--brass);}
+
+/* Static fallback is the default, accessible-first state: full narrative, no motion required. */
+.journey-fallback{margin-top:8px;}
+.scrolly{display:none;}
+
+/* Scroll-driven variant — enabled only on wide viewports with no reduced-motion
+   preference (see the compound media query below). It layers a sticky route
+   diagram over the same facts; it never becomes the only place the story lives. */
+.scrolly-inner{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(32px,5vw,64px);align-items:start;}
+.scrolly-visual{position:sticky;top:92px;padding-top:8px;}
+.scrolly-visual-frame{position:relative;height:min(58vh,520px);padding-right:112px;}
+.scrolly-svg{width:calc(100% - 112px);height:100%;overflow:visible;}
+.scrolly-path{fill:none;stroke:var(--line-strong);stroke-width:1.5;}
+.scrolly-node circle{fill:var(--bg-0);stroke:var(--line-strong);stroke-width:1.5;transition:fill .4s ease,stroke .4s ease;}
+.scrolly-node.is-reached circle{fill:var(--brass);stroke:var(--brass);}
+.scrolly-marker{fill:var(--brass-soft);filter:drop-shadow(0 0 6px rgba(200,162,76,0.45));}
+.scrolly-node-label{position:absolute;right:0;width:104px;transform:translateY(-50%);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted-2);transition:color .4s ease;}
+.scrolly-node-label.is-reached{color:var(--brass-soft);}
+.scrolly-env{opacity:0;transition:opacity .7s ease;}
+.scrolly-env circle,.scrolly-env rect{fill:rgba(243,238,226,0.02);stroke:var(--line-strong);stroke-width:1.1;}
+.scrolly-env path{fill:none;stroke:var(--line-strong);stroke-width:1;}
+.scrolly-env[data-env="3"] .env-bars{stroke-width:2;stroke-linecap:round;}
+.scrolly-env.is-upcoming{opacity:0;}
+.scrolly-env.is-passed{opacity:0.22;}
+.scrolly-env.is-current{opacity:1;}
+.scrolly-env.is-current circle,.scrolly-env.is-current rect{stroke:var(--brass);fill:rgba(200,162,76,0.10);}
+.scrolly-env.is-current path{stroke:var(--brass-soft);}
+.scrolly-tagline{margin-top:22px;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--brass-soft);opacity:0;transition:opacity .6s ease;}
+.scrolly-visual.is-resolved .scrolly-tagline{opacity:1;}
+.scrolly-stage{min-height:92vh;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:32px 0;max-width:60ch;transition:opacity .5s ease;}
+.scrolly-stage:first-child{min-height:52vh;}
+.scrolly-stage .tl-desc{max-width:58ch;}
+.scrolly.scrolly-js .scrolly-stage{opacity:0.38;}
+.scrolly.scrolly-js .scrolly-stage.is-active{opacity:1;}
+
+@media (min-width:981px) and (prefers-reduced-motion: no-preference){
+  .scrolly{display:block;}
+  .journey-fallback{display:none;}
+}
 
 /* ============ EXPERIENCE ============ */
 .exp-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
@@ -368,6 +426,7 @@ footer{padding:32px 0 40px;}
   .loop-row{grid-template-columns:1fr;}
   .loop-arrow{transform:rotate(90deg);padding:2px 0;}
   .profile-grid{grid-template-columns:1fr;}
+  .case-grid{grid-template-columns:1fr;gap:28px;}
   .impact-grid{grid-template-columns:repeat(2,1fr);}
   .cap-grid{grid-template-columns:1fr 1fr;}
   .cred-grid{grid-template-columns:1fr;gap:36px;}
@@ -403,6 +462,8 @@ footer{padding:32px 0 40px;}
     --line-strong:rgba(0,0,0,0.3);
   }
   header.site-header,.hamburger,.mobile-panel,.hero-cta,.btn,footer .btn{display:none !important;}
+  .scrolly{display:none !important;}
+  .journey-fallback{display:block !important;}
   html,body{background:#fff !important;color:var(--ivory) !important;}
   body{background-image:none !important;}
   .wrap{max-width:100% !important;padding:0 24px !important;}
@@ -475,7 +536,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
         <p class="hero-role">Head of Delivery · <span class="org">ALFA Co. / Al Faisaliah Group</span></p>
         <p class="hero-loc">Riyadh, Saudi Arabia</p>
         <p class="hero-tagline">Operator. Platform. P&amp;L.</p>
-        <p class="hero-statement">Delivery and commercial leadership shaped on both sides of the marketplace — restaurant operations and platform strategy — now applied to full P&amp;L ownership across a multi-brand portfolio.</p>
+        <p class="hero-statement">Operator-side P&amp;L leadership shaped by first-hand experience inside the marketplace. Today, I lead a multi-brand delivery business with profitable, self-funded growth at the centre of the mandate.</p>
         <div class="hero-cta">
           <a href="#experience" class="btn btn-primary">View Experience</a>
           <a href="#contact" class="btn">Get in Touch</a>
@@ -490,11 +551,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
 
     <div class="kpi-strip reveal">
       <div class="kpi-grid">
-        <div class="kpi"><div class="num">13+</div><div class="lbl">Years in operations, digital commerce &amp; commercial leadership</div></div>
-        <div class="kpi"><div class="num">13</div><div class="lbl">Restaurant brands under current delivery P&amp;L ownership</div></div>
+        <div class="kpi"><div class="num">13+</div><div class="lbl">Restaurant brands under current delivery P&amp;L ownership</div></div>
         <div class="kpi"><div class="num">84+</div><div class="lbl">Physical locations across the portfolio</div></div>
         <div class="kpi"><div class="num">250+</div><div class="lbl">Digital storefronts &amp; revenue centres managed</div></div>
-        <div class="kpi"><div class="num">2 Sides</div><div class="lbl">Operator and marketplace platform experience</div></div>
+        <div class="kpi"><div class="num">~1M</div><div class="lbl">Annual orders across the delivery business</div></div>
+        <div class="kpi"><div class="num">14+</div><div class="lbl">Years Experience</div></div>
       </div>
     </div>
   </div>
@@ -508,7 +569,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
       <div class="loop-arrow" aria-hidden="true">→</div>
       <div class="loop-node"><div class="k">Marketplace Platform</div><div class="v">Meituan · Keeta</div></div>
       <div class="loop-arrow" aria-hidden="true">→</div>
-      <div class="loop-node"><div class="k">Commercial Ownership</div><div class="v">Delivery P&amp;L · ALFA Co.</div></div>
+      <div class="loop-node"><div class="k">Commercial Ownership</div><div class="v">P&amp;L, Growth &amp; Transformation · ALFA Co.</div></div>
     </div>
     <p class="loop-caption">Restaurant operations. Marketplace experience. Commercial ownership.</p>
   </div>
@@ -525,7 +586,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
       <div class="profile-copy reveal">
         <p>Aaqib's career began in people operations and multi-unit restaurant management, progressing to <strong>Head of Operations</strong> for a multi-brand Saudi restaurant business before the online channel became the priority it is today.</p>
         <p>That operating background was followed by two years inside <strong>Meituan / Keeta</strong> during its Saudi market expansion, managing strategic enterprise restaurant accounts and negotiating commission structures, promotions and growth plans from the platform side of the same relationships he now manages from the restaurant side.</p>
-        <p>He currently leads the delivery business for <strong>ALFA Co. / Al Faisaliah Group</strong>, owning the P&amp;L, aggregator strategy and commercial performance of a 13-brand, 84+ location portfolio — turning brand-, location- and platform-level data into pricing, promotion and investment decisions reported directly to CEO, CFO and Board.</p>
+        <p>He currently leads the delivery business for <strong>ALFA Co. / Al Faisaliah Group</strong> — a large-scale, multi-brand delivery P&amp;L spanning 13+ brands, 84+ locations and 250+ digital storefronts — turning brand-, location- and platform-level data into pricing, promotion and investment decisions, and resetting the business from growth-at-any-cost toward profitable, self-funded growth.</p>
       </div>
       <div class="principles reveal" aria-label="Operating principles">
         <div class="principle"><span class="n">01</span><span class="t">Data should lead to a decision, not just describe a result.</span></div>
@@ -541,46 +602,76 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
 <section id="impact" class="section-alt">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Signature Impact</span>
-      <h2>What changed, and why it mattered</h2>
-      <p class="dek">Selected initiatives from the current mandate at ALFA Co. — each one a shift in how the business decides, not just what it reports.</p>
+      <span class="eyebrow">Signature Impact — H1 2026</span>
+      <h2>The business got stronger, not just bigger</h2>
+      <p class="dek">A reset of the delivery P&amp;L at ALFA Co. — from growth funded by platform subsidy to growth funded by the business itself. Figures are like-for-like vs H1 2025.</p>
     </div>
+
+    <div class="kpi-strip kpi-strip--impact reveal">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="num">+14.5%</div><div class="lbl">Organic Growth</div></div>
+        <div class="kpi"><div class="num">+18.9%</div><div class="lbl">Order Growth</div></div>
+        <div class="kpi"><div class="num">+25.9%</div><div class="lbl">Profit Growth</div></div>
+        <div class="kpi"><div class="num">+7.0pp</div><div class="lbl">Margin Expansion</div></div>
+        <div class="kpi"><div class="num">−82%</div><div class="lbl">Subsidy Dependency</div></div>
+      </div>
+      <p class="impact-narrative">Growth got cleaner — more demand, stronger profit, and a materially lower dependency on platform-funded economics.</p>
+    </div>
+
+    <div class="case-study reveal">
+      <div class="case-head">
+        <span class="eyebrow">Signature Case Study</span>
+        <h3>From leakage to profitable growth</h3>
+      </div>
+      <div class="case-grid">
+        <div class="case-col">
+          <div class="case-label">The Challenge</div>
+          <p>Commercial spend had built up across platforms, promotions and marketing activity without a consistent, contribution-based decision framework — funding growth without full visibility into what it was buying.</p>
+        </div>
+        <div class="case-col">
+          <div class="case-label">The Reset</div>
+          <ul class="case-reset-list">
+            <li>Reviewed the commercial cost base line by line</li>
+            <li>Renegotiated aggregator economics and delivery-fee structures</li>
+            <li>Reallocated marketing spend toward measurable return</li>
+            <li>Separated organic growth from subsidy-funded growth</li>
+            <li>Introduced contribution-margin thinking into platform and promotional decisions</li>
+          </ul>
+        </div>
+        <div class="case-col">
+          <div class="case-label">The Result</div>
+          <div class="case-result-row">
+            <span>+14.5% Organic Growth</span>
+            <span>+25.9% Profit Growth</span>
+            <span>+7.0pp Margin Expansion</span>
+            <span>−82% Subsidy Dependency</span>
+          </div>
+        </div>
+      </div>
+      <p class="case-close">The objective was not simply to spend less. It was to make every riyal work harder.</p>
+    </div>
+
     <div class="impact-grid reveal">
       <div class="impact-card">
-        <span class="tag">Performance Architecture</span>
+        <span class="tag">01 · Marketplace Economics</span>
+        <h3>All-in economics, not headline commission</h3>
+        <p>Reframed aggregator decisions around all-in economics — commission, advertising, discount funding, delivery support, compensation and payment costs — rather than headline commission. Renegotiated commercial structures and redirected volume toward channels with stronger contribution.</p>
+      </div>
+      <div class="impact-card">
+        <span class="tag">02 · Performance Architecture</span>
         <h3>One view, not six spreadsheets</h3>
-        <p>Consolidated brand-, location- and aggregator-level performance — revenue, orders, AOV, compensation — into a single management view, replacing fragmented platform-by-platform reporting and moving the management conversation from topline sales to quality of revenue.</p>
+        <p>Built a single management view across brand, location, aggregator and month — and re-based reporting to separate organic demand from platform-funded growth, giving leadership a clear read on underlying channel health.</p>
       </div>
       <div class="impact-card">
-        <span class="tag">Commercial Economics</span>
-        <h3>All-in aggregator economics</h3>
-        <p>Re-based aggregator and channel decisions on all-in economics — commission, discounts, advertising, delivery subsidy, compensation and payment costs — rather than headline commission rates. In several cases, cannibalising volume toward a lower-cost channel improved contribution without growing total orders.</p>
-      </div>
-      <div class="impact-card">
-        <span class="tag">True Economics</span>
-        <h3>Separating funded growth from real growth</h3>
-        <p>Re-based performance reporting to distinguish underlying organic performance from platform-funded and marketing-supported growth, giving leadership an accurate read on which channels were actually growing versus which were being bought.</p>
-      </div>
-      <div class="impact-card">
-        <span class="tag">Compensation Forensics</span>
+        <span class="tag">03 · Operational Leakage</span>
         <h3>From absolute cost to operational signal</h3>
-        <p>Rebuilt compensation and refund analysis around percentage of sales and orders rather than absolute value — isolating the specific locations and aggregator pairings driving disproportionate loss and giving management a basis to act on operational leakage rather than the total bill.</p>
-      </div>
-      <div class="impact-card">
-        <span class="tag">Menu &amp; Portfolio</span>
-        <h3>Pricing and offers on profitability, not habit</h3>
-        <p>Audited offer and promotional structures across brands and removed or restructured those that weren't economically sound, resetting pricing to stay competitive without eroding contribution. Also restructured virtual-brand architecture — repositioning Steak House Burger under the core Steak House ecosystem.</p>
-      </div>
-      <div class="impact-card">
-        <span class="tag">Executive Reporting</span>
-        <h3>Data built for a decision, not a status update</h3>
-        <p>Built the recurring reporting used for CEO, CFO and Board discussions — connecting P&amp;L, growth, aggregator economics and compensation directly to pricing, investment and build-vs-buy-vs-partner decisions on the own-ordering channel.</p>
+        <p>Rebuilt compensation and refund analysis around percentage of sales rather than absolute value — isolating the locations and platform pairings driving disproportionate loss, and giving management a basis to act.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ JOURNEY / TIMELINE ============ -->
+<!-- ============ JOURNEY / SCROLL-DRIVEN CAREER NARRATIVE ============ -->
 <section id="journey">
   <div class="wrap">
     <div class="section-head reveal">
@@ -588,7 +679,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
       <h2>Widening scope, not just changing jobs</h2>
       <p class="dek">From people operations to multi-unit leadership, into a marketplace platform, and back to the operator side with full commercial ownership.</p>
     </div>
+  </div>
 
+  <!-- Static fallback: shown on mobile/tablet and whenever reduced motion is requested.
+       Contains the complete narrative in plain readable form — the scroll animation
+       below is a progressive enhancement layered on top of this, never a replacement for it. -->
+  <div class="wrap journey-fallback">
     <div class="timeline reveal">
       <div class="tl-item is-current">
         <div class="tl-dot" aria-hidden="true"></div>
@@ -596,7 +692,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
         <div class="tl-dates">March 2026 — Present</div>
         <h3 class="tl-title">Head of Delivery</h3>
         <p class="tl-org">ALFA Co. / Al Faisaliah Group · Riyadh</p>
-        <p class="tl-desc">Full delivery P&amp;L and commercial ownership across a 13-brand, 84+ location portfolio and 250+ digital storefronts — the point where operating discipline and platform fluency meet.</p>
+        <p class="tl-desc">Full delivery P&amp;L and commercial ownership across a 13-brand, 84+ location portfolio — resetting the business from growth funded by subsidy to growth funded by itself, at the point where operating discipline and platform fluency meet.</p>
       </div>
 
       <div class="tl-item">
@@ -633,6 +729,98 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
       </div>
     </div>
   </div>
+
+  <!-- Scroll-driven version: desktop viewports with no motion-reduction preference only
+       (see the compound media query in the stylesheet). A sticky route diagram tracks
+       scroll position while four career chapters advance beside it. -->
+  <div class="scrolly" id="scrolly">
+    <div class="wrap scrolly-inner">
+      <div class="scrolly-visual" aria-hidden="true">
+        <div class="scrolly-visual-frame">
+          <svg class="scrolly-svg" viewBox="0 0 160 700" preserveAspectRatio="xMidYMid meet">
+            <!-- Environment motifs: each group is a restrained abstraction of one career
+                 chapter. They build up cumulatively as the route is travelled — is-current
+                 (full presence), is-passed (receded but visible), is-upcoming (hidden) —
+                 so the surroundings evolve with the journey instead of just the marker. -->
+            <g class="scrolly-env" data-env="0" aria-hidden="true">
+              <path d="M80,58 L58,90 M80,58 L102,90 M80,58 L80,120"/>
+              <circle cx="80" cy="58" r="3.2"/>
+              <circle cx="58" cy="92" r="2.4"/>
+              <circle cx="102" cy="92" r="2.4"/>
+              <circle cx="80" cy="122" r="2.4"/>
+            </g>
+            <g class="scrolly-env" data-env="1" aria-hidden="true">
+              <rect x="12" y="172" width="13" height="13" rx="1.5"/>
+              <rect x="34" y="193" width="13" height="13" rx="1.5"/>
+              <rect x="8" y="214" width="13" height="13" rx="1.5"/>
+              <rect x="30" y="235" width="13" height="13" rx="1.5"/>
+              <path d="M20,186 L40,200 M40,207 L15,221 M15,228 L37,242"/>
+            </g>
+            <g class="scrolly-env" data-env="2" aria-hidden="true">
+              <path d="M130,400 L104,378 M130,400 L108,426 M130,400 L150,373 M130,400 L153,422 M130,400 L130,442"/>
+              <circle cx="130" cy="400" r="4"/>
+              <circle cx="104" cy="378" r="2.4"/>
+              <circle cx="108" cy="426" r="2.4"/>
+              <circle cx="150" cy="373" r="2.4"/>
+              <circle cx="153" cy="422" r="2.4"/>
+              <circle cx="130" cy="442" r="2.4"/>
+            </g>
+            <g class="scrolly-env" data-env="3" aria-hidden="true">
+              <path class="env-bars" d="M56,652 v18 M68,640 v30 M80,626 v44 M92,612 v58 M104,598 v72"/>
+              <path d="M50,672 L108,672"/>
+            </g>
+            <path class="scrolly-path" d="M80,20 C80,120 30,150 30,260 C30,370 130,380 130,470 C130,560 90,580 90,680" />
+            <g class="scrolly-node" data-node="0" transform="translate(80,20)"><circle r="5"/></g>
+            <g class="scrolly-node" data-node="1" transform="translate(30,260)"><circle r="5"/></g>
+            <g class="scrolly-node" data-node="2" transform="translate(130,470)"><circle r="5"/></g>
+            <g class="scrolly-node" data-node="3" transform="translate(90,680)"><circle r="5"/></g>
+            <circle class="scrolly-marker" cx="80" cy="20" r="7"/>
+          </svg>
+          <div class="scrolly-node-label" data-node-label="0" style="top:3%;">Foundation</div>
+          <div class="scrolly-node-label" data-node-label="1" style="top:37%;">Operations</div>
+          <div class="scrolly-node-label" data-node-label="2" style="top:67%;">Platform</div>
+          <div class="scrolly-node-label" data-node-label="3" style="top:97%;">P&amp;L</div>
+        </div>
+        <p class="scrolly-tagline">Operator. Platform. P&amp;L.</p>
+      </div>
+
+      <div class="scrolly-stages">
+        <div class="scrolly-stage" data-stage="0">
+          <span class="tl-era">Stage 01 · Foundation</span>
+          <h3 class="tl-title">People, first</h3>
+          <p class="tl-dates">2012 — 2020 · Al-Nayfat Co. · Cercon General Contractors · Hotel Relax Inn</p>
+          <p class="tl-desc">Eight years across HR administration and workforce operations — compensation, compliance, recruitment — for multi-site employers in Saudi Arabia and India. The operating grounding beneath everything since.</p>
+        </div>
+
+        <div class="scrolly-stage" data-stage="1">
+          <span class="tl-era">Stage 02 · Restaurant Operations</span>
+          <h3 class="tl-title">Onto the restaurant floor</h3>
+          <p class="tl-dates">January 2021 — August 2024 · Food Basics Co. (incl. Hamburgini)</p>
+          <p class="tl-desc">Promoted twice in three years — Assistant Operations Manager → Regional Manager / Operations Consultant → Head of Operations. Multi-unit, multi-brand operations: systems, staffing, cost discipline, execution.</p>
+          <div class="tl-progress" aria-label="Role progression">
+            <span>Assistant Operations Manager</span><span>Regional Manager / Operations Consultant</span><span>Head of Operations</span>
+          </div>
+        </div>
+
+        <div class="scrolly-stage" data-stage="2">
+          <span class="tl-era">Stage 03 · Marketplace Platform</span>
+          <h3 class="tl-title">Operator becomes platform</h3>
+          <p class="tl-dates">August 2024 — February 2026 · Meituan · Keeta</p>
+          <p class="tl-desc">Moved inside a food-delivery marketplace during its Saudi expansion — the restaurant environment giving way to a network of accounts, commission structures and growth plans. Marketplace economics learned from inside the platform.</p>
+          <div class="tl-progress" aria-label="Role progression">
+            <span>Key Account Manager</span><span>Senior Key Account Manager</span><span>Strategic Accounts Manager</span>
+          </div>
+        </div>
+
+        <div class="scrolly-stage" data-stage="3">
+          <span class="tl-era">Stage 04 · Commercial P&amp;L Leadership</span>
+          <h3 class="tl-title">Both sides, one P&amp;L</h3>
+          <p class="tl-dates">March 2026 — Present · ALFA Co. / Al Faisaliah Group</p>
+          <p class="tl-desc">Back on the operator side, now with the platform's economics built in. Full delivery P&amp;L across 13+ brands, 84+ locations and 250+ digital storefronts — analytics, aggregator economics and executive decision-making in one seat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ EXPERIENCE ============ -->
@@ -655,14 +843,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
           <span class="exp-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
         <div class="exp-collapse"><div class="exp-collapse-inner"><div class="exp-body" id="exp1">
-          <div class="exp-scope"><b>Scope</b>Delivery P&amp;L and commercial performance across a 13-brand, 84+ location restaurant portfolio operating 250+ digital storefronts on every major Saudi aggregator — HungerStation, Jahez, Keeta, Ninja, The Chefz and others.</div>
+          <div class="exp-scope"><b>Scope</b>13+ brands · 84+ locations · 250+ revenue centres · ~1M annual orders — across every major Saudi delivery marketplace, including HungerStation, Jahez, Keeta, Ninja and The Chefz. Leading a delivery function spanning analytics, brand performance and coordination.</div>
           <ul class="exp-bullets">
-            <li><strong>Performance architecture:</strong> built a single management view of brand, location, aggregator and month-level performance — revenue, orders, AOV, compensation — replacing fragmented platform-by-platform reporting.</li>
-            <li><strong>Contribution-margin decisions:</strong> re-based aggregator and channel investment on all-in economics — commission, discounts, advertising, subsidy, compensation and payment cost — rather than headline commission rates.</li>
-            <li><strong>Compensation &amp; refund forensics:</strong> rebuilt loss analysis around percentage of sales rather than absolute value, isolating the locations and platforms driving disproportionate leakage.</li>
-            <li><strong>Menu, pricing &amp; packaging:</strong> audited offers and virtual-brand architecture for economic soundness, and led a packaging overhaul across portion integrity, temperature and brand presentation.</li>
-            <li><strong>Executive &amp; Board reporting:</strong> built the recurring reporting connecting P&amp;L, growth and aggregator economics to CEO, CFO and Board decisions on pricing, investment and own-channel strategy.</li>
-            <li><strong>Forecasting &amp; planning:</strong> own annual delivery forecasts, business planning and the build-vs-buy-vs-partner evaluation of an own-ordering channel.</li>
+            <li><strong>P&amp;L &amp; commercial ownership:</strong> own the full delivery P&amp;L, commercial strategy and forecasting across the portfolio — from pricing and promotional investment to annual planning.</li>
+            <li><strong>Cost-base reset:</strong> shifted the business from growth-at-any-cost to profitable, self-funded growth — reviewing commercial spend line by line and redirecting investment toward measurable return.</li>
+            <li><strong>Aggregator economics:</strong> re-based aggregator and channel decisions on all-in economics — commission, advertising, discount funding, delivery support, compensation and payment cost — rather than headline commission rates.</li>
+            <li><strong>Performance architecture:</strong> built a single management view of brand, location, aggregator and month-level performance, separating organic demand from platform-funded growth.</li>
+            <li><strong>Portfolio &amp; menu transformation:</strong> audited offer and virtual-brand architecture for economic soundness, and led a packaging overhaul across portion integrity, temperature and brand presentation.</li>
+            <li><strong>Executive planning &amp; governance:</strong> own delivery budgeting, forecasting and executive performance reviews, with direct CEO, CFO and Board exposure — including the build-vs-buy-vs-partner evaluation of an own-ordering channel.</li>
           </ul>
         </div></div></div>
       </div>
@@ -742,31 +930,31 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
       <div class="cap-col">
         <h3>P&amp;L &amp; Commercial</h3>
         <ul>
-          <li>Channel &amp; aggregator economics</li>
-          <li>Contribution margin analysis</li>
+          <li>Contribution-margin economics</li>
           <li>Pricing &amp; promotional strategy</li>
-          <li>Forecasting &amp; business planning</li>
+          <li>Forecasting &amp; budgeting</li>
           <li>Commercial negotiation</li>
+          <li>Investment allocation</li>
         </ul>
       </div>
       <div class="cap-col">
-        <h3>Digital Commerce &amp; Growth</h3>
+        <h3>Digital Commerce &amp; Marketplaces</h3>
         <ul>
-          <li>Marketplace &amp; aggregator strategy</li>
-          <li>Menu engineering &amp; digital merchandising</li>
-          <li>Conversion &amp; storefront optimisation</li>
-          <li>Own-channel evaluation</li>
-          <li>Marketing ROI</li>
+          <li>Aggregator strategy</li>
+          <li>Marketplace economics</li>
+          <li>Menu engineering</li>
+          <li>Digital merchandising &amp; promotions</li>
+          <li>AOV &amp; conversion</li>
         </ul>
       </div>
       <div class="cap-col">
         <h3>Operations</h3>
         <ul>
           <li>Multi-unit / multi-brand operations</li>
-          <li>SOP design &amp; standardisation</li>
-          <li>Customer experience &amp; service recovery</li>
           <li>Performance management</li>
-          <li>Logistics &amp; delivery service levels</li>
+          <li>Customer experience</li>
+          <li>SOP design &amp; standardisation</li>
+          <li>Operational leakage</li>
         </ul>
       </div>
       <div class="cap-col">
@@ -774,27 +962,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
         <ul>
           <li>Operating model design</li>
           <li>Business case development</li>
-          <li>KPI architecture</li>
-          <li>Executive &amp; Board reporting</li>
-          <li>Build vs. buy vs. partner evaluation</li>
+          <li>Portfolio transformation</li>
+          <li>Build vs. buy vs. partner</li>
+          <li>Executive planning &amp; governance</li>
         </ul>
       </div>
       <div class="cap-col">
         <h3>Data &amp; Decision Support</h3>
         <ul>
-          <li>Management dashboards</li>
-          <li>Compensation &amp; profitability analysis</li>
+          <li>Performance architecture</li>
+          <li>Dashboard design</li>
           <li>Scenario modelling</li>
-          <li>Financial / P&amp;L analysis</li>
-        </ul>
-      </div>
-      <div class="cap-col">
-        <h3>Leadership</h3>
-        <ul>
-          <li>Cross-functional stakeholder management</li>
-          <li>Team development &amp; mentoring</li>
-          <li>Performance-driven culture</li>
-          <li>Change management</li>
+          <li>Like-for-like analysis</li>
+          <li>Management reporting</li>
         </ul>
       </div>
     </div>
@@ -854,8 +1034,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
     <div class="contact-grid">
       <div class="contact-copy reveal">
         <span class="eyebrow">Contact</span>
-        <h2>Let's talk</h2>
-        <p>Open to Director, Head of Operations / Delivery and Commercial Director mandates where strategy has to convert into measurable operating and P&amp;L results.</p>
+        <h2>Let's connect</h2>
+        <p>Always open to conversations around restaurant operations, digital commerce, marketplace economics and business transformation.</p>
       </div>
       <div class="contact-list reveal">
         <a class="contact-row" href="mailto:aaquibsufi26@gmail.com"><span class="k">Email</span><span>aaquibsufi26@gmail.com</span></a>
@@ -949,6 +1129,65 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offs
       btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
   });
+
+  // Scroll-driven career journey — desktop, motion-enabled viewports only.
+  // The complete narrative already exists as plain readable text in .journey-fallback
+  // (shown instead of this on mobile/tablet or when reduced motion is requested, via
+  // CSS alone), so this block only ever adds an ambient visual layer on top of it.
+  var scrollyEl = document.getElementById('scrolly');
+  var scrollyIsWide = window.matchMedia && window.matchMedia('(min-width:981px)').matches;
+  if(scrollyEl && !reduceMotion && scrollyIsWide){
+    var scrollyVisual = scrollyEl.querySelector('.scrolly-visual');
+    var scrollyPath = scrollyEl.querySelector('.scrolly-path');
+    var scrollyMarker = scrollyEl.querySelector('.scrolly-marker');
+    var scrollyNodes = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-node'));
+    var scrollyLabels = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-node-label'));
+    var scrollyStages = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-stage'));
+    var scrollyEnvLayers = Array.prototype.slice.call(scrollyEl.querySelectorAll('.scrolly-env'));
+
+    if(scrollyPath && scrollyMarker && scrollyStages.length){
+      var pathLength = scrollyPath.getTotalLength();
+      var tickingScrolly = false;
+
+      function updateScrollyMarker(){
+        tickingScrolly = false;
+        var rect = scrollyEl.getBoundingClientRect();
+        var total = scrollyEl.offsetHeight - window.innerHeight;
+        var scrolled = -rect.top;
+        var progress = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
+        var pt = scrollyPath.getPointAtLength(progress * pathLength);
+        scrollyMarker.setAttribute('cx', pt.x);
+        scrollyMarker.setAttribute('cy', pt.y);
+      }
+      function onScrollyScroll(){
+        if(!tickingScrolly){ tickingScrolly = true; requestAnimationFrame(updateScrollyMarker); }
+      }
+      window.addEventListener('scroll', onScrollyScroll, { passive: true });
+      window.addEventListener('resize', onScrollyScroll);
+      updateScrollyMarker();
+
+      if('IntersectionObserver' in window){
+        scrollyEl.classList.add('scrolly-js');
+        var scrollyObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(!entry.isIntersecting) return;
+            var idx = scrollyStages.indexOf(entry.target);
+            if(idx === -1) return;
+            scrollyStages.forEach(function(s,i){ s.classList.toggle('is-active', i === idx); });
+            scrollyNodes.forEach(function(n,i){ n.classList.toggle('is-reached', i <= idx); });
+            scrollyLabels.forEach(function(l,i){ l.classList.toggle('is-reached', i <= idx); });
+            scrollyEnvLayers.forEach(function(env,i){
+              env.classList.toggle('is-current', i === idx);
+              env.classList.toggle('is-passed', i < idx);
+              env.classList.toggle('is-upcoming', i > idx);
+            });
+            if(scrollyVisual){ scrollyVisual.classList.toggle('is-resolved', idx === scrollyStages.length - 1); }
+          });
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+        scrollyStages.forEach(function(s){ scrollyObserver.observe(s); });
+      }
+    }
+  }
 })();
 </script>
 
